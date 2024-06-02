@@ -1,0 +1,70 @@
+<html>
+
+<head>
+  <title> Shoot! </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+    <h1> Pool! </h1>
+    <hr><br>
+    <div>
+      <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+      <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+      <svg width="700" height="1375" viewBox="-25 -25 1400 2750" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect width="1350" height="2700" x="0" y="0" fill="#C0D0C0" />
+        <rect width="1400" height="25" x="-25" y="-25" fill="darkgreen" />
+        <rect width="1400" height="25" x="-25" y="2700" fill="darkgreen" />
+        <rect width="25" height="2750" x="-25" y="-25" fill="darkgreen" />
+        <rect width="25" height="2750" x="1350" y="-25" fill="darkgreen" />
+        <circle cx="0" cy="0" r="114" fill="black" />
+        <circle cx="0" cy="1350" r="114" fill="black" />
+        <circle cx="0" cy="2700" r="114" fill="black" />
+        <circle cx="1350" cy="0" r="114" fill="black" />
+        <circle cx="1350" cy="1350" r="114" fill="black" />
+        <circle cx="1350" cy="2700" r="114" fill="black" />
+        <circle cx="675" cy="2025" r="28" fill="WHITE" id="ball0" />
+        <circle cx="675" cy="675" r="28" fill="YELLOW" id="ball1" />
+        <circle cx="740" cy="625" r="28" fill="BLUE" id="ball2" />
+        <circle cx="610" cy="625" r="28" fill="RED" id="ball3" />
+        <circle cx="800" cy="575" r="28" fill="PURPLE" id="ball4" />
+        <circle cx="675" cy="575" r="28" fill="BLACK" id="ball8" />
+        <circle cx="550" cy="575" r="28" fill="ORANGE" id="ball5" />
+        <circle cx="860" cy="525" r="28" fill="GREEN" id="ball6" />
+        <circle cx="740" cy="525" r="28" fill="BROWN" id="ball7" />
+        <circle cx="610" cy="525" r="28" fill="LIGHTYELLOW" id="ball9" />
+        <circle cx="480" cy="525" r="28" fill="LIGHTBLUE" id="ball10" />
+        <circle cx="920" cy="475" r="28" fill="PINK" id="ball11" />
+        <circle cx="800" cy="475" r="28" fill="MEDIUMPURPLE" id="ball12" />
+        <circle cx="675" cy="475" r="28" fill="LIGHTSALMON" id="ball13" />
+        <circle cx="550" cy="475" r="28" fill="LIGHTGREEN" id="ball14" />
+        <circle cx="425" cy="475" r="28" fill="SANDYBROWN" id="ball15" />
+      </svg>
+    </div>
+
+    <p> Lets Play!</p>
+    <p>Enter Info Below: </p>
+    
+    <p>
+      Game Name:
+      <input type="text" id="gameName" placeholder="Game Name">
+    </p>
+    <p>
+      Player 1:
+      <input type="text" id="player1Name" placeholder="Player 1">
+    </p>
+    <p>
+      Player 2:
+      <input type="text" id="player2Name" placeholder="Player 2">
+    </p>
+    <br><br>
+    <button onclick="sendNames()">
+      <p>Start Game</p>
+    </button>
+
+</body>
+
+</html>
