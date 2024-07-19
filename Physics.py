@@ -1,20 +1,20 @@
-import phylib;
-import os;
-import sqlite3;
-import math;
+import phylib
+import os
+import sqlite3
+import math
 
 ################################################################################
 # import constants from phylib to global varaibles
-BALL_RADIUS   = phylib.PHYLIB_BALL_RADIUS;
-BALL_DIAMETER = phylib.PHYLIB_BALL_DIAMETER;
-HOLE_RADIUS = phylib.PHYLIB_HOLE_RADIUS;
-TABLE_LENGTH = phylib.PHYLIB_TABLE_LENGTH; 
-TABLE_WIDTH = phylib.PHYLIB_TABLE_WIDTH;
-SIM_RATE = phylib.PHYLIB_SIM_RATE;
-VEL_EPSILON = phylib.PHYLIB_VEL_EPSILON;
-DRAG = phylib.PHYLIB_DRAG;
-MAX_TIME = phylib.PHYLIB_MAX_TIME;
-MAX_OBJECTS = phylib.PHYLIB_MAX_OBJECTS;
+BALL_RADIUS   = phylib.PHYLIB_BALL_RADIUS
+BALL_DIAMETER = phylib.PHYLIB_BALL_DIAMETER
+HOLE_RADIUS = phylib.PHYLIB_HOLE_RADIUS
+TABLE_LENGTH = phylib.PHYLIB_TABLE_LENGTH 
+TABLE_WIDTH = phylib.PHYLIB_TABLE_WIDTH
+SIM_RATE = phylib.PHYLIB_SIM_RATE
+VEL_EPSILON = phylib.PHYLIB_VEL_EPSILON
+DRAG = phylib.PHYLIB_DRAG
+MAX_TIME = phylib.PHYLIB_MAX_TIME
+MAX_OBJECTS = phylib.PHYLIB_MAX_OBJECTS
 
 # add more here
 HEADER = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -23,8 +23,8 @@ HEADER = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="700" height="1375" viewBox="-25 -25 1400 2750"
 xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="1350" height="2700" x="0" y="0" fill="#C0D0C0" />""";
-FOOTER = """</svg>\n""";
+<rect width="1350" height="2700" x="0" y="0" fill="#C0D0C0" />"""
+FOOTER = """</svg>\n"""
 
 #CONSTANT FOR a3
 FRAME_INTERVAL = 0.01
@@ -51,7 +51,7 @@ BALL_COLOURS = [
     "LIGHTSALMON",      # no LIGHTORANGE
     "LIGHTGREEN",
     "SANDYBROWN",       # no LIGHTBROWN 
-    ];
+    ]
 
 ################################################################################
 class Coordinate( phylib.phylib_coord ):
@@ -59,7 +59,7 @@ class Coordinate( phylib.phylib_coord ):
     This creates a Coordinate subclass, that adds nothing new, but looks
     more like a nice Python class.
     """
-    pass;
+    pass
 
 ################################################################################
 class StillBall( phylib.phylib_object ):
@@ -78,10 +78,10 @@ class StillBall( phylib.phylib_object ):
                                        phylib.PHYLIB_STILL_BALL, 
                                        number, 
                                        pos, None, None, 
-                                       0.0, 0.0 );
+                                       0.0, 0.0 )
       
         # this converts the phylib_object into a StillBall class
-        self.__class__ = StillBall;
+        self.__class__ = StillBall
 
     # add an svg method here
     def svg(self):
@@ -106,10 +106,10 @@ class RollingBall( phylib.phylib_object ):
                                        phylib.PHYLIB_ROLLING_BALL, 
                                        number, 
                                        pos, vel, acc, 
-                                       0.0, 0.0 );
+                                       0.0, 0.0 )
       
         # this converts the phylib_object into a RollingBall class
-        self.__class__ = RollingBall;
+        self.__class__ = RollingBall
 
     # add an svg method here
     def svg(self):
@@ -134,10 +134,10 @@ class Hole( phylib.phylib_object ):
                                        phylib.PHYLIB_HOLE, 
                                        0, 
                                        pos, None, None, 
-                                       0.0, 0.0 );
+                                       0.0, 0.0 )
       
         # this converts the phylib_object into a Hole class
-        self.__class__ = Hole;
+        self.__class__ = Hole
 
     # add an svg method here
     def svg(self):
@@ -162,10 +162,10 @@ class HCushion( phylib.phylib_object ):
                                        phylib.PHYLIB_HCUSHION, 
                                        0, 
                                        None, None, None, 
-                                       0.0, y );
+                                       0.0, y )
       
         # this converts the phylib_object into a HCushion class
-        self.__class__ = HCushion;
+        self.__class__ = HCushion
 
     # add an svg method here
     def svg(self):
@@ -196,10 +196,10 @@ class VCushion( phylib.phylib_object ):
                                        phylib.PHYLIB_VCUSHION, 
                                        0, 
                                        None, None, None, 
-                                       x, 0.0 );
+                                       x, 0.0 )
       
         # this converts the phylib_object into a VCushion class
-        self.__class__ = VCushion;
+        self.__class__ = VCushion
 
     # add an svg method here
     def svg(self):
@@ -224,8 +224,8 @@ class Table(phylib.phylib_table ):
         This method call the phylib_table constructor and sets the current
         object index to -1.
         """
-        phylib.phylib_table.__init__( self );
-        self.current = -1;
+        phylib.phylib_table.__init__( self )
+        self.current = -1
 
     def __iadd__( self, other ):
         """
@@ -233,8 +233,8 @@ class Table(phylib.phylib_table ):
         This method allows you to write "table+=object" to add another object
         to the table.
         """
-        self.add_object( other );
-        return self;
+        self.add_object( other )
+        return self
 
     def __iter__( self ):
         """
@@ -242,19 +242,19 @@ class Table(phylib.phylib_table ):
         This allows you to write "for object in table:" to loop over all
         the objects in the table.
         """
-        return self;
+        return self
 
     def __next__( self ):
         """
         This provides the next object from the table in a loop.
         """
-        self.current += 1;  # increment the index to the next object
+        self.current += 1  # increment the index to the next object
         if self.current < MAX_OBJECTS:   # check if there are no more objects
-            return self[ self.current ]; # return the latest object
+            return self[ self.current ] # return the latest object
 
         # if we get there then we have gone through all the objects
-        self.current = -1;    # reset the index counter
-        raise StopIteration;  # raise StopIteration to tell for loop to stop
+        self.current = -1    # reset the index counter
+        raise StopIteration  # raise StopIteration to tell for loop to stop
 
     def __getitem__( self, index ):
         """
@@ -263,31 +263,31 @@ class Table(phylib.phylib_table ):
         and then sets the __class__ attribute to make the class match
         the object type.
         """
-        result = self.get_object( index ); 
+        result = self.get_object( index ) 
         if result==None:
-            return None;
+            return None
         if result.type == phylib.PHYLIB_STILL_BALL:
-            result.__class__ = StillBall;
+            result.__class__ = StillBall
         if result.type == phylib.PHYLIB_ROLLING_BALL:
-            result.__class__ = RollingBall;
+            result.__class__ = RollingBall
         if result.type == phylib.PHYLIB_HOLE:
-            result.__class__ = Hole;
+            result.__class__ = Hole
         if result.type == phylib.PHYLIB_HCUSHION:
-            result.__class__ = HCushion;
+            result.__class__ = HCushion
         if result.type == phylib.PHYLIB_VCUSHION:
-            result.__class__ = VCushion;
-        return result;
+            result.__class__ = VCushion
+        return result
 
     def __str__( self ):
         """
         Returns a string representation of the table that matches
         the phylib_print_table function from A1Test1.c.
         """
-        result = "";    # create empty string
-        result += "time = %6.1f;\n" % self.time;    # append time
+        result = ""    # create empty string
+        result += "time = %6.1f\n" % self.time    # append time
         for i,obj in enumerate(self): # loop over all objects and number them
-            result += "  [%02d] = %s\n" % (i,obj);  # append object description
-        return result;  # return the string
+            result += "  [%02d] = %s\n" % (i,obj)  # append object description
+        return result  # return the string
 
     def segment( self ):
         """
@@ -297,11 +297,11 @@ class Table(phylib.phylib_table ):
         to make it a Table object.
         """
 
-        result = phylib.phylib_table.segment( self );
+        result = phylib.phylib_table.segment( self )
         if result:
-            result.__class__ = Table;
-            result.current = -1;
-        return result;
+            result.__class__ = Table
+            result.current = -1
+        return result
 
     # add svg method here
     def svg(self):
@@ -326,32 +326,32 @@ class Table(phylib.phylib_table ):
     #A3 FUNC GIVEN
     def roll( self, t ):
 
-        new = Table();
+        new = Table()
         for ball in self:
             if isinstance( ball, RollingBall ):
                 # create4 a new ball with the same number as the old ball
                 new_ball = RollingBall( ball.obj.rolling_ball.number,
                                         Coordinate(0,0),
                                         Coordinate(0,0),
-                                        Coordinate(0,0) );
+                                        Coordinate(0,0) )
                 
                 # compute where it rolls to
-                phylib.phylib_roll( new_ball, ball, t );
+                phylib.phylib_roll( new_ball, ball, t )
 
                 # add ball to table
-                new += new_ball;
+                new += new_ball
 
             if isinstance( ball, StillBall ):
                 # create a new ball with the same number and pos as the old ball
                 new_ball = StillBall( ball.obj.still_ball.number,
                                         Coordinate( ball.obj.still_ball.pos.x,
-                                        ball.obj.still_ball.pos.y ) );
+                                        ball.obj.still_ball.pos.y ) )
                 
                 # add ball to table
-                new += new_ball;
+                new += new_ball
         
         # return table
-        return new;
+        return new
 
     def cueBall(self, table, xvel, yvel):
 
@@ -400,14 +400,14 @@ class Database():
             os.remove(self.db_file)
 
         # create database file if it doesn't exist and connect to it
-        conn = sqlite3.connect(self.db_file);
+        conn = sqlite3.connect(self.db_file)
 
     #creates the tables if not already
     def createDB(self):
 
         #open connection and set variable for cursor
-        self.conn = sqlite3.connect(self.db_file);
-        cur = self.conn.cursor();
+        self.conn = sqlite3.connect(self.db_file)
+        cur = self.conn.cursor()
 
         cur.execute( """CREATE TABLE IF NOT EXISTS Ball (
                    BALLID     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -415,51 +415,51 @@ class Database():
                    XPOS     FLOAT NOT NULL,
                    YPOS     FLOAT NOT NULL,
                    XVEL    FLOAT,
-                   YVEL     FLOAT);""" );
+                   YVEL     FLOAT)""" )
 
         cur.execute( """CREATE TABLE IF NOT EXISTS TTable(
                         TABLEID     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                        TIME        FLOAT NOT NULL);""" );
+                        TIME        FLOAT NOT NULL)""" )
 
         cur.execute( """CREATE TABLE IF NOT EXISTS BallTable(
                         BALLID INTEGER NOT NULL,
                         TABLEID INTEGER NOT NULL,
                         FOREIGN KEY(BALLID) REFERENCES Ball,
-                        FOREIGN KEY(TABLEID) REFERENCES TTable);""" );
+                        FOREIGN KEY(TABLEID) REFERENCES TTable)""" )
 
         cur.execute( """CREATE TABLE IF NOT EXISTS Shot(
                         SHOTID       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                         PLAYERID     INTEGER NOT NULL,
                         GAMEID       INTEGER NOT NULL,
                         FOREIGN KEY(PLAYERID) REFERENCES Player,
-                        FOREIGN KEY(GAMEID) REFERENCES Game);""" );
+                        FOREIGN KEY(GAMEID) REFERENCES Game)""" )
 
         cur.execute( """CREATE TABLE IF NOT EXISTS TableShot(
                         TABLEID INTEGER NOT NULL,
                         SHOTID INTEGER NOT NULL,
                         FOREIGN KEY(TABLEID) REFERENCES TTable,
-                        FOREIGN KEY(SHOTID) REFERENCES Shot);""" );
+                        FOREIGN KEY(SHOTID) REFERENCES Shot)""" )
 
         cur.execute( """CREATE TABLE IF NOT EXISTS Game(
                         GAMEID       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                        GAMENAME     VARCHAR(64) NOT NULL)""");
+                        GAMENAME     VARCHAR(64) NOT NULL)""")
 
         cur.execute( """CREATE TABLE IF NOT EXISTS Player(
                         PLAYERID   INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                         GAMEID INTEGER NOT NULL,
                         PLAYERNAME     VARCHAR(64) NOT NULL,
-                        FOREIGN KEY(GAMEID) REFERENCES Game(GAMEID))""" );
+                        FOREIGN KEY(GAMEID) REFERENCES Game(GAMEID))""" )
         
         #close cur and commit
-        cur.close();
-        self.conn.commit();
+        cur.close()
+        self.conn.commit()
 
     #use to build the table class in Python to return it
     def readTable(self, tableID):
 
         #open connection and set variable for cursor
-        self.conn = sqlite3.connect(self.db_file);
-        cur = self.conn.cursor();
+        self.conn = sqlite3.connect(self.db_file)
+        cur = self.conn.cursor()
         
         #create table object to populate
         tableObj = Table()
@@ -484,7 +484,7 @@ class Database():
                     FROM Ball
                     JOIN BallTable ON Ball.BALLID  = BallTable.BALLID
                     JOIN TTable ON BallTable.TABLEID = TTable.TABLEID
-                    WHERE TTable.TABLEID = '{}';""".format(tableID +1))
+                    WHERE TTable.TABLEID = '{}'""".format(tableID +1))
 
         ballInfo = cur.fetchall()
 
@@ -523,7 +523,7 @@ class Database():
 
                     rbVel = Coordinate(float(xvel), float(yvel))
                     rbAcc = Coordinate(0.0,0.0)
-                    rbSpeed = math.sqrt(xvel*xvel + yvel*yvel);
+                    rbSpeed = math.sqrt(xvel*xvel + yvel*yvel)
 
                     if (rbSpeed > VEL_EPSILON):
                         rbAcc.x = ((rbVel.x * -1.0) / rbSpeed) * DRAG
@@ -538,8 +538,8 @@ class Database():
                 continue
 
         #close cur and commit
-        cur.close();
-        self.conn.commit();
+        cur.close()
+        self.conn.commit()
 
         return tableObj
         
@@ -550,8 +550,8 @@ class Database():
             return None
 
         #open connection and set variable for cursor
-        self.conn = sqlite3.connect(self.db_file);
-        cur = self.conn.cursor();
+        self.conn = sqlite3.connect(self.db_file)
+        cur = self.conn.cursor()
 
         #store table in TTable --> time and get table ID back
         cur.execute("""INSERT INTO TTable(TIME)
@@ -584,16 +584,16 @@ class Database():
                         VALUES ('{}','{}')""".format(ballID,tableID))
             
         #close cur and commit
-        cur.close();
-        self.conn.commit();
+        cur.close()
+        self.conn.commit()
         
         #return the autoincremented TABLEID value minus 1 
         return tableID-1
         
     #close and commit all connections
     def close(self):
-       self.conn.commit();
-       self.conn.close();
+       self.conn.commit()
+       self.conn.close()
 
     def newShot(self,cur, playerName, gameName):
 
@@ -630,8 +630,8 @@ class Game():
 
     def __init__( self, gameID=None, gameName=None, player1Name=None,
     player2Name=None ):
-        self.conn = sqlite3.connect("phylib.db");
-        self.cur = self.conn.cursor();
+        self.conn = sqlite3.connect("phylib.db")
+        self.cur = self.conn.cursor()
 
         #check to see if called right way
         if gameID != None and gameName == None and player1Name == None and player2Name == None:
@@ -642,9 +642,9 @@ class Game():
             self.conn.commit()
 
         elif gameID == None and isinstance(player1Name,str) and isinstance(player2Name,str):
-            self.player1Name = player1Name;
-            self.player2Name = player2Name;
-            self.gameName = gameName;
+            self.player1Name = player1Name
+            self.player2Name = player2Name
+            self.gameName = gameName
             
             #add info to tables
             self.setGame()

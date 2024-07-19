@@ -5,10 +5,10 @@ import sqlite3
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # used to parse the URL and extract form data for GET requests
-from urllib.parse import urlparse, parse_qsl;
+from urllib.parse import urlparse, parse_qsl
 
-import sys; # used to get argv
-import cgi; # used to parse Mutlipart FormData 
+import sys # used to get argv
+import cgi # used to parse Mutlipart FormData 
             # this should be replace with multipart in the future
 
 import json  # Import the json module
@@ -28,85 +28,85 @@ class MyHandler( BaseHTTPRequestHandler ):
     MyHandler.currentValue = 0
 
     #parse the URL to get the path and form data
-    parsed  = urlparse( self.path );
+    parsed  = urlparse( self.path )
     # or parsed.path in ['/pool.html']
 
     #check to see if it is requesting the shoot
     if parsed.path in ['/shoot.html'] or parsed.path in ['/pool.html']:
 
       #retreive the HTML file
-      try: fp = open( '.'+self.path );
+      try: fp = open( '.'+self.path )
       except FileNotFoundError:
         #generate 404 for nonexistent file
-        self.send_response( 404 );
-        self.end_headers();
-        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) );
+        self.send_response( 404 )
+        self.end_headers()
+        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) )
         return
   
-      content = fp.read();
+      content = fp.read()
 
       #sends header and footer
       self.send_response(200)
-      self.send_header( "Content-type", "text/html" );
-      self.send_header( "Content-length", len( content ) );
-      self.end_headers();
+      self.send_header( "Content-type", "text/html" )
+      self.send_header( "Content-length", len( content ) )
+      self.end_headers()
 
       #send it to the broswer
-      self.wfile.write( bytes( content, "utf-8" ) );
-      fp.close();
+      self.wfile.write( bytes( content, "utf-8" ) )
+      fp.close()
 
     #checks to see if it ends with svg
     elif parsed.path.startswith("/table-") and parsed.path.endswith(".svg"):
 
       #retreive the file
-      try: fp = open( '.'+self.path );
+      try: fp = open( '.'+self.path )
       except FileNotFoundError:
         #generate 404 for nonexistent file
-        self.send_response( 404 );
-        self.end_headers();
-        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) );
+        self.send_response( 404 )
+        self.end_headers()
+        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) )
         return
   
-      content = fp.read();
+      content = fp.read()
 
       #sends header and footer
       self.send_response(200)
-      self.send_header( "Content-type", "image/svg+xml" );
-      self.send_header("Content-length", len(content)); 
-      self.end_headers();
+      self.send_header( "Content-type", "image/svg+xml" )
+      self.send_header("Content-length", len(content)) 
+      self.end_headers()
 
       #send it to the broswer
-      self.wfile.write(bytes( content, "utf-8" ));
-      fp.close();
+      self.wfile.write(bytes( content, "utf-8" ))
+      fp.close()
       
     elif parsed.path in ['/script.js'] or parsed.path in ['/style.css']:
 
       #retrieve the file
-      try: fp = open( '.'+self.path );
+      try: fp = open( '.'+self.path )
       except FileNotFoundError:
         #generate 404 for nonexistent file
-        self.send_response( 404 );
-        self.end_headers();
-        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) );
+        self.send_response( 404 )
+        self.end_headers()
+        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) )
         return
   
-      content = fp.read();
+      content = fp.read()
       
       #generate the headers
-      self.send_response( 200 ); # OK
-      self.send_header( "Content-type", "" );
-      self.send_header( "Content-length", len( content ) );
-      self.end_headers();
+      self.send_response( 200 ) # OK
+      self.send_header( "Content-type", "" )
+      self.send_header( "Content-length", len( content ) )
+      self.end_headers()
 
       #send it to the broswer
-      self.wfile.write( bytes( content, "utf-8" ) );
-      fp.close();
+      self.wfile.write( bytes( content, "utf-8" ) )
+      fp.close()
 
     else:
         #generate 404 for GET requests that aren't the 3 files above
-        self.send_response( 404 );
-        self.end_headers();
-        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) );
+        self.send_response( 404 )
+        self.end_headers()
+        self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) )
 
   #handle post request
   def do_POST(self):
@@ -114,7 +114,7 @@ class MyHandler( BaseHTTPRequestHandler ):
     MyHandler.currentValue = 0
 
     #parse the URL to get the path
-    parsed  = urlparse( self.path );
+    parsed  = urlparse( self.path )
 
     if parsed.path in ['/sendNames']:
 
@@ -172,8 +172,8 @@ class MyHandler( BaseHTTPRequestHandler ):
         # MyHandler.db = Physics.Database()
         
         # #open connection and set variable for cursor
-        # MyHandler.db.conn = sqlite3.connect(self.db_file);
-        # cur = MyHandler.db.conn.cursor();
+        # MyHandler.db.conn = sqlite3.connect(self.db_file)
+        # cur = MyHandler.db.conn.cursor()
 
         # #insert ball data into the database
         # for ball_no, xpos, ypos in ball_data:
@@ -254,9 +254,9 @@ class MyHandler( BaseHTTPRequestHandler ):
 
     else:
       #send saying it did not work
-      self.send_response( 404 );
-      self.end_headers();
-      self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) );
+      self.send_response( 404 )
+      self.end_headers()
+      self.wfile.write( bytes( "404: %s not found" % self.path, "utf-8" ) )
       self.wfile.write("Ok")
     
 if __name__ == "__main__":
