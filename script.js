@@ -257,22 +257,27 @@ function shotit(event) {
     //create post request and pass values
     $.ajax({
         type: "POST",
-        url: "http://localhost:52174//process-shot",
+        url: "http://localhost:52174/process-shot",
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (result) {
             // Handle successful response
             console.log("Shot processed:", result);
 
-            const SVGDiv = $('#SVGInfo');
+            const SVGDiv = $('#svgInfo');
 
             //loop through and replace svg
-            (function (index) {
+            const tableSVG = result.tableSVG;
+
+            for (let i = 0; i < tableSVG.length; i++) {
                 setTimeout(function () {
-                    SVGDiv.empty();
-                    SVGDiv.append(tableSVG[index]);
-                }, i * 1000);
-            })(i);
+                    SVGDiv.html(tableSVG[i]);
+                }, i * 10);
+            }
+
+            setTimeout(function () {
+                changeTurns();
+            }, tableSVG.length * 10);
 
             //change turns
             changeTurns();

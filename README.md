@@ -57,5 +57,7 @@ python3 A2Test2.py       # Generates SVG outputs
 ### Play the game:
 ```
 python3 server.py 5XXXX  # Launch local web server (use last 4 digits of student ID)
-http://localhost:5XXXX/shoot.html
+http://localhost:52174/shoot.html
+
+1222174
 ```

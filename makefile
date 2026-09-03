@@ -2,6 +2,10 @@ CC=clang
 CFLAGS=-c -Wall -pedantic -std=c99
 LIBS=-lm # note: the l means library, m means math
 SWIG=swig
+
+PYTHON_CONFIG=python3-config
+PY_CFLAGS=$(shell $(PYTHON_CONFIG) --includes)
+PY_LDFLAGS=$(shell $(PYTHON_CONFIG) --ldflags)
 #export LD_LIBRARY_PATH=`pwd`
 #python3.11 TestFiles/A2Test1.py
 #python3.11 TestFiles/A2Test2.py --> make svg files
@@ -23,11 +27,11 @@ phylib.o: phylib.c phylib.h
 phylib_wrap.c phylib.py: phylib.i
 	$(SWIG) -python phylib.i
 
-phylib_wrap.o: phylib_wrap.c 
-	$(CC) $(CFLAGS) -c phylib_wrap.c -I/Library/Frameworks/Python.framework/Versions/3.11/include/python3.11/ -fPIC -o phylib_wrap.o
+phylib_wrap.o: phylib_wrap.c
+	$(CC) $(CFLAGS) phylib_wrap.c $(PY_CFLAGS) -fPIC -o phylib_wrap.o
 
 _phylib.so: phylib_wrap.o
-	$(CC) phylib_wrap.o -shared -L. -L/Library/Frameworks/Python.framework/Versions/3.11/lib/ -lpython3.11 -lphylib -o _phylib.so
+	$(CC) phylib_wrap.o -shared -L. $(PY_LDFLAGS) -lphylib -Wl,-rpath,'$$ORIGIN' -o _phylib.so
 
 clean:
 	rm -f *.o *.so a4 phylib_wrap.c phylib.py

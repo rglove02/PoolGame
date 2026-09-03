@@ -364,11 +364,14 @@ class Table(phylib.phylib_table ):
                 break
 
         #set type of cue.ball to phylib.ROLLING_BALL
-        cuePos = ball.obj.still_ball.pos
-        ball.obj.rolling_ball.type = phylib.ROLLING_BALL
+        cueX = ball.obj.still_ball.pos.x
+        cueY = ball.obj.still_ball.pos.y
+
+        ball.type = phylib.PHYLIB_ROLLING_BALL
 
         ball.obj.rolling_ball.number = 0
-        ball.obj.rolling_ball.pos = cuePos
+        ball.obj.rolling_ball.pos.x = cueX
+        ball.obj.rolling_ball.pos.y = cueY
 
         ball.obj.rolling_ball.vel.x = xvel
         ball.obj.rolling_ball.vel.y = yvel
@@ -692,40 +695,74 @@ class Game():
 
 
     #add new entry to SHOT
-    def shoot( self, gameName, playerName, table, xvel, yvel ):
+    def shoot(self, gameName, playerName, table, xvel, yvel):
 
-        #get shotID and put info in SHOT table
+        # get shotID and put info in SHOT table
         shotID = Database.newShot(self, self.cur, playerName, gameName)
+        self.conn.commit()
+        
+        # find cue ball and make it a rolling ball
+        cueBall = table.cueBall(table, xvel, yvel)
 
-        #find obj of cue ball that is in Table class
-        cueBall = Table.cueBall(self, self.cur, shotID, xvel, yvel)
+        # database object used to save generated tables
+        db = Database()
 
-        #repeatedly call the segment method from A2 until it returns None. 
-        table = Table.segment(self)
+        # list of table IDs that server.py expects back
+        tableIDList = []
+
+        # repeatedly call segment until there are no more segments
         while table is not None:
 
-            #get before time, call segment and get after time
+            # get time before segment
             beforeTime = table.time
-            table = Table.segment(self)
-            afterTime = table.time
-            
-            #determine the length of the segment (in seconds)
-            #subtract the time at the beginning of the segment from the time at the end of the segment.
-            #Divide by FRAME_INTERVAL and round it down to the nearest integer. 
-            lengthSec = floor((beforeTime - afterTime)/FRAME_INTERVAL)
 
-            # initialize newTable
-            newTable = None 
+            # get next segment
+            nextTable = table.segment()
 
-            # loops over those integers
-            for i in lengthSec:
+            # segment returns None when no balls are rolling
+            if nextTable is None:
+                break
+
+            # get time after segment
+            afterTime = nextTable.time
+
+            # YOUR ORIGINAL CALCULATION - unchanged
+            lengthSec = math.floor(
+                (afterTime - beforeTime) / FRAME_INTERVAL
+            )
+
+            # loop through frames
+            for i in range(lengthSec):
+
                 timeFrame = i * FRAME_INTERVAL
-                newTable = phylib.phylib_roll(newTable, table, timeFrame)
+
+                # generate the table at this point in the segment
+                newTable = table.roll(timeFrame)
+
+                # YOUR ORIGINAL TIME CALCULATION - unchanged
                 newTable.time = beforeTime + timeFrame
 
-                #Save the table using writeTable
-                Database.writeTable(newTable)
+                # save table
+                tableID = db.writeTable(newTable)
 
-            table = newTable
+                # save its ID for server.py
+                if tableID is not None:
+                    tableIDList.append(tableID)
 
-    
+                    # associate this table with the shot
+                    self.cur.execute(
+                        """INSERT INTO TableShot (TABLEID, SHOTID)
+                        VALUES (?, ?)""",
+                        (tableID + 1, shotID)
+                    )
+
+                    self.conn.commit()
+
+            # move on to the next physics segment
+            table = nextTable
+
+        self.conn.commit()
+
+        return tableIDList
+
+        

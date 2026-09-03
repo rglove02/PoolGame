@@ -128,9 +128,7 @@ class MyHandler( BaseHTTPRequestHandler ):
         MyHandler.player1Name = data['player1']
         MyHandler.player2Name = data['player2']
 
-        print(f"Player 1: {MyHandler.player1Name}, Player 2: {MyHandler.player2Name}")
-
-        game = Physics.Game(None, MyHandler.gameName, MyHandler.player1Name, MyHandler.player2Name)
+        MyHandler.game = Physics.Game(None, MyHandler.gameName, MyHandler.player1Name, MyHandler.player2Name)
         print("Game created")
 
         table = Physics.Table()
@@ -188,6 +186,8 @@ class MyHandler( BaseHTTPRequestHandler ):
           if file.endswith('.svg') and file.startswith('table'):
               os.remove(file)
 
+        MyHandler.table = table
+
         #opening the files
         while table is not None:
           # Pads with zero if i is less than 10
@@ -232,25 +232,41 @@ class MyHandler( BaseHTTPRequestHandler ):
       content_length = int(self.headers['Content-Length'])
       post_data = self.rfile.read(content_length)
 
-      #tatake out values rom form
       data = json.loads(post_data.decode('utf-8'))
       xvel = data['xvel']
       yvel = data['yvel']
       currentPlayer = data['current']
 
-      # tableIDList = Physics.Game.shoot(MyHandler.gameName, currentPlayer, table, xvel, yvel )
-      tableIDList = Physics.Game.shoot(MyHandler.gameName, currentPlayer, table, xvel, yvel )
+      tableIDList = MyHandler.game.shoot(
+          MyHandler.gameName,
+          currentPlayer,
+          MyHandler.table,
+          xvel,
+          yvel
+      )
+
       tableSVG = []
+
       for idNum in tableIDList:
-        table = db.readTable(idNum)
-        tableSVG.append(table.svg())
+        frameTable = MyHandler.db.readTable(idNum)
+
+        if frameTable is not None:
+          tableSVG.append(frameTable.svg())
+
+      # The last table becomes the starting state for the next shot
+      if len(tableIDList) > 0:
+        MyHandler.table = MyHandler.db.readTable(tableIDList[-1])
 
       self.send_response(200)
       self.send_header('Content-Type', 'application/json')
       self.end_headers()
-      self.wfile.write(json.dumps({"status": "success"}).encode('utf-8'))
-        
-      return tableSVG
+
+      self.wfile.write(
+          json.dumps({
+              "status": "success",
+              "tableSVG": tableSVG
+          }).encode('utf-8')
+      )
 
     else:
       #send saying it did not work
@@ -261,8 +277,12 @@ class MyHandler( BaseHTTPRequestHandler ):
     
 if __name__ == "__main__":
   try:
+    MyHandler.db = Physics.Database()
+    MyHandler.db.createDB()
+
     httpd = HTTPServer(('localhost', int(sys.argv[1])), MyHandler)
     print("Server listening on port: ", int(sys.argv[1]))
     httpd.serve_forever()
+
   except Exception as e:
     print("Error:", e)
