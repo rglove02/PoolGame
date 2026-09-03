@@ -85,9 +85,22 @@ class StillBall( phylib.phylib_object ):
 
     # add an svg method here
     def svg(self):
-        #add values for the string
-        return """ <circle cx="%d" cy="%d" r="%d" fill="%s" id="ball%d"/>\n""" % (self.obj.still_ball.pos.x, self.obj.still_ball.pos.y,BALL_RADIUS,BALL_COLOURS[self.obj.still_ball.number],self.obj.still_ball.number)
+        number = self.obj.still_ball.number
 
+        if number == 0:
+            return """ <circle cx="%d" cy="%d" r="%d" fill="WHITE" stroke="black" stroke-width="5" id="ball0"/>\n""" % (
+                self.obj.still_ball.pos.x,
+                self.obj.still_ball.pos.y,
+                BALL_RADIUS
+            )
+
+        return """ <circle cx="%d" cy="%d" r="%d" fill="%s" id="ball%d"/>\n""" % (
+            self.obj.still_ball.pos.x,
+            self.obj.still_ball.pos.y,
+            BALL_RADIUS,
+            BALL_COLOURS[number],
+            number
+        )
 
 ################################################################################
 class RollingBall( phylib.phylib_object ):
@@ -359,9 +372,11 @@ class Table(phylib.phylib_table ):
         for obj in table:
 
             #checks to see if it is a ball and it its number is 0
-            if isinstance(obj, StillBall) and getattr(obj, 'type', None) == 0:
+            if isinstance(obj, StillBall) and obj.obj.still_ball.number == 0:
                 ball = obj
                 break
+
+        table.current = -1
 
         #set type of cue.ball to phylib.ROLLING_BALL
         cueX = ball.obj.still_ball.pos.x

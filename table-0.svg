@@ -14,7 +14,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
  <circle cx="1350" cy="0" r="114" fill="black" />
  <circle cx="1350" cy="1350" r="114" fill="black" />
  <circle cx="1350" cy="2700" r="114" fill="black" />
- <circle cx="675" cy="2025" r="28" fill="WHITE" id="ball0"/>
+ <circle cx="675" cy="2025" r="28" fill="WHITE" stroke="black" stroke-width="5" id="ball0"/>
  <circle cx="675" cy="675" r="28" fill="YELLOW" id="ball1"/>
  <circle cx="740" cy="625" r="28" fill="BLUE" id="ball2"/>
  <circle cx="610" cy="625" r="28" fill="RED" id="ball3"/>
