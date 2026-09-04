@@ -241,6 +241,7 @@ class RollingBall( phylib.phylib_object ):
             self.obj.rolling_ball.pos.x,
             self.obj.rolling_ball.pos.y
         )
+        
 ################################################################################
 class Hole( phylib.phylib_object ):
     """

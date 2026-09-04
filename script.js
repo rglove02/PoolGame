@@ -261,7 +261,6 @@ function lowHighBallDisplay(){
         player2Remaining
     );
 
-
     // message once all group balls are gone
     if (player1Remaining.length == 0) {
         $('#player1Cleared').show();
@@ -275,7 +274,6 @@ function lowHighBallDisplay(){
         $('#player2Cleared').hide();
     }
 }
-
 
 function trackit(event) {
     const svgElement = document.querySelector('#svgInfo svg');
@@ -365,23 +363,17 @@ function shotit(event) {
     hideLine();
 
     //animations - make cue ball move
-
     const data = {
         xvel: xvel,
         yvel: yvel,
         current: currentPlayer
     };
 
-
-    // ============================================================
-    // ADDED: remember balls before shot
-    // ============================================================
-
+    // remember balls before shot
     shotBallsBefore =
         getBallNumbersFromElement(svgElement);
 
     shotPlayer = currentPlayer;
-
 
     //create post request and pass values
     $.ajax({
@@ -396,11 +388,7 @@ function shotit(event) {
             const SVGDiv = $('#svgInfo');
             const tableSVG = result.tableSVG;
 
-
-            // ====================================================
-            // ADDED: see which balls disappeared
-            // ====================================================
-
+            // see which balls disappeared
             const pocketedBalls =
                 findPocketedBalls(
                     shotBallsBefore,
@@ -439,11 +427,7 @@ function shotit(event) {
 
             */
 
-
-            // ====================================================
-            // ADDED: process score after animation
-            // ====================================================
-
+            // Process score after animation
             setTimeout(function () {
 
                 processShotScoring(
@@ -483,11 +467,7 @@ function changeTurns() {
     // Update who's turn it is
     $('#turnDisplay').text("It's now " + currentPlayer + " turn");
 
-
-    // ============================================================
-    // ADDED: remember and display new turn
-    // ============================================================
-
+    // remember and display new turn
     localStorage.setItem(
         'currentPlayer',
         currentPlayer
@@ -590,15 +570,6 @@ function announceWinner(winnerName) {
     alert(winnerName + " wins the game!");
 }
 
-
-
-// ================================================================
-// ADDED FUNCTIONS BELOW
-//
-// Original functions above remain in the file.
-// ================================================================
-
-
 // Return all ball numbers currently in the SVG
 function getBallNumbersFromElement(svgRoot) {
 
@@ -628,7 +599,6 @@ function getBallNumbersFromElement(svgRoot) {
     return [...new Set(ballNumbers)];
 }
 
-
 // Get ball numbers from an SVG string returned by Python
 function getBallNumbersFromSVGString(svgString) {
 
@@ -645,18 +615,12 @@ function getBallNumbersFromSVGString(svgString) {
     );
 }
 
-
 // Find which balls disappeared during the shot
-function findPocketedBalls(
-    ballsBeforeShot,
-    tableSVG
-) {
-
+function findPocketedBalls(ballsBeforeShot, tableSVG) {
     let previousBalls =
         ballsBeforeShot.slice();
 
     const pocketedBalls = [];
-
 
     for (const frame of tableSVG) {
 
@@ -665,33 +629,22 @@ function findPocketedBalls(
                 frame
             );
 
-
         for (const ballNum of previousBalls) {
-
-            if (
-                !currentBalls.includes(ballNum) &&
-                !pocketedBalls.includes(ballNum)
-            ) {
-
+            if (!currentBalls.includes(ballNum) && !pocketedBalls.includes(ballNum)) {
                 pocketedBalls.push(
                     ballNum
                 );
             }
         }
 
-
         previousBalls =
             currentBalls;
     }
-
-
     return pocketedBalls;
 }
 
-
 // Determine which group a ball belongs to
 function groupForBall(ballNum) {
-
     // solids / low
     if (ballNum >= 1 && ballNum <= 7) {
         return "low";
@@ -740,10 +693,8 @@ function ballsRemainingForGroup(group) {
 function assignGroups(firstBallNum, shooter) {
 
     // already assigned
-    if (player1Balls ||
-        player2Balls
-    ) {
-
+    if (player1Balls || player2Balls) {
+ 
         return;
     }
 
@@ -762,7 +713,6 @@ function assignGroups(firstBallNum, shooter) {
             : "low";
 
     if (shooter == player1Name) {
-
         player1Balls =
             shooterGroup;
 
@@ -770,7 +720,6 @@ function assignGroups(firstBallNum, shooter) {
             otherGroup;
 
     } else {
-
         player2Balls =
             shooterGroup;
 
@@ -792,42 +741,23 @@ function assignGroups(firstBallNum, shooter) {
 }
 
 // See if a ball belongs to a particular player
-function playerOwnsBall(
-    playerName,
-    ballNum
-) {
-
+function playerOwnsBall(playerName, ballNum) {
     const group =
-        getPlayerGroup(
-            playerName
-        );
-
-
-    return (
-        groupForBall(ballNum)
-        ==
-        group
-    );
+        getPlayerGroup(playerName);
+    return (groupForBall(ballNum) == group);
 }
 
 // Update the seven little ball slots in pool.html
-function setScoreBallSlots(
-    idPrefix,
-    balls
-) {
-
+function setScoreBallSlots(idPrefix, balls) {
     for (let i = 0; i < 7; i++) {
-
         const slot =
             document.getElementById(
                 idPrefix + i
             );
 
-
         if (!slot) {
             continue;
         }
-
 
         // reset slot
         slot.classList.remove(
@@ -839,119 +769,55 @@ function setScoreBallSlots(
             'data-ball-number'
         );
 
-
         // no ball for this slot
         if (i >= balls.length) {
-
             slot.style.display =
                 'none';
 
             continue;
         }
 
-
         const ballNum =
             balls[i];
-
 
         const colour =
             DISPLAY_BALL_COLOURS[
                 ballNum
             ];
 
+        slot.style.setProperty('--ball-colour', colour);
+        slot.setAttribute('data-ball-number', ballNum);
 
-        slot.style.setProperty(
-            '--ball-colour',
-            colour
-        );
-
-
-        slot.setAttribute(
-            'data-ball-number',
-            ballNum
-        );
-
-
-        if (
-            ballNum >= 1 &&
-            ballNum <= 7
-        ) {
-
-            slot.classList.add(
-                'score-solid'
-            );
-
+        if (ballNum >= 1 && ballNum <= 7) {
+            slot.classList.add('score-solid');
         } else {
-
-            slot.classList.add(
-                'score-striped'
-            );
+            slot.classList.add('score-striped');
         }
-
-
-        slot.style.display =
-            'inline-flex';
+        slot.style.display ='inline-flex';
     }
 }
 
-
 // Process all scoring and turn logic after one shot
-function processShotScoring(
-    pocketedBalls,
-    shooter
-) {
-
+function processShotScoring(pocketedBalls, shooter) {
     // If nobody has solids/stripes yet,
     // first valid object ball assigns them.
-    if (
-        !player1Balls &&
-        !player2Balls
-    ) {
-
+    if (!player1Balls && !player2Balls) {
         const firstGroupBall =
             pocketedBalls.find(
                 function (ballNum) {
-
-                    return (
-                        groupForBall(
-                            ballNum
-                        )
-                        !=
-                        null
-                    );
+                    return (groupForBall(ballNum) != null);
                 }
             );
 
-
-        if (
-            firstGroupBall
-            !==
-            undefined
-        ) {
-
-            assignGroups(
-                firstGroupBall,
-                shooter
-            );
+        if (firstGroupBall !== undefined) {
+            assignGroups(firstGroupBall, shooter);
         }
     }
 
-
     // Remove pocketed solids/stripes
     // from the remaining-ball list
-    for (
-        const ballNum
-        of pocketedBalls
-    ) {
-
-        if (
-            groupForBall(
-                ballNum
-            )
-            !=
-            null
-        ) {
-
+    for (const ballNum of pocketedBalls) {
+        if (groupForBall(ballNum) != null) {
             allBalls =
                 allBalls.filter(
                     ball =>
@@ -960,23 +826,14 @@ function processShotScoring(
         }
     }
 
-
-    localStorage.setItem(
-        'allBalls',
-        JSON.stringify(allBalls)
-    );
-
-
+    localStorage.setItem('allBalls', JSON.stringify(allBalls));
     lowHighBallDisplay();
-
 
     const cueBallPocketed =
         pocketedBalls.includes(0);
 
-
     const eightBallPocketed =
         pocketedBalls.includes(8);
-
 
     // 8-ball was pocketed
     if (eightBallPocketed) {
@@ -986,58 +843,31 @@ function processShotScoring(
                 shooter
             );
 
-
         const ballsLeft =
             ballsRemainingForGroup(
                 shooterGroup
             );
 
-
         // shooter cleared their group first
-        if (
-            shooterGroup != null &&
-            ballsLeft.length == 0 &&
-            !cueBallPocketed
-        ) {
-
-            announceWinner(
-                shooter
-            );
-
+        if (shooterGroup != null && ballsLeft.length == 0 && !cueBallPocketed) {
+            announceWinner(shooter);
         } else {
-
             // 8 ball too early or scratch on 8
-            if (
-                shooter
-                ==
-                player1Name
-            ) {
-
-                announceWinner(
-                    player2Name
-                );
-
+            if (shooter == player1Name) {
+                announceWinner(player2Name);
             } else {
-
-                announceWinner(
-                    player1Name
-                );
+                announceWinner(player1Name);
             }
         }
-
-
         return;
     }
 
-
     // cue ball pocketed
     if (cueBallPocketed) {
-
         changeTurns();
 
         return;
     }
-
 
     // Did shooter pocket at least one
     // ball belonging to their group?
@@ -1052,19 +882,15 @@ function processShotScoring(
             }
         );
 
-
     if (pocketedOwnBall) {
-
         // same player gets another turn
         currentPlayer =
             shooter;
-
 
         localStorage.setItem(
             'currentPlayer',
             currentPlayer
         );
-
 
         $('#turnDisplay').text(
             "It's still " +
@@ -1072,11 +898,8 @@ function processShotScoring(
             " turn"
         );
 
-
         lowHighBallDisplay();
-
     } else {
-
         // no own ball pocketed
         changeTurns();
     }
