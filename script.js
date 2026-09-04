@@ -145,18 +145,19 @@ function initalizePlayers() {
 
     //set low and high balls (randomized)
     // Randomly assign "High" and "Low" numbered balls to players
-    // if (Math.random() < 0.5) {
-    //     localStorage.setItem('player1Balls', 'Low (1-7)');
-    //     localStorage.setItem('player2Balls', 'High (9-15)');
-    // } else {
-    //     localStorage.setItem('player1Balls', 'High (9-15)');
-    //     localStorage.setItem('player2Balls', 'Low (1-7)');
-    // }
+    print("Randomly assigning ball types to players...");
+    if (Math.random() < 0.5) {
+        localStorage.setItem('player1Balls', 'Low (1-7)');
+        localStorage.setItem('player2Balls', 'High (9-15)');
+    } else {
+        localStorage.setItem('player1Balls', 'High (9-15)');
+        localStorage.setItem('player2Balls', 'Low (1-7)');
+    }
 }
 
 function lowHighBallDisplay(){
-    // $('#ballnumInfo').append();
-    // $('#ballnumInfo').append();
+    $('#ballnumInfo').append();
+    $('#ballnumInfo').append();
 }
 
 function trackit(event) {

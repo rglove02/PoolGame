@@ -368,6 +368,8 @@ class Table(phylib.phylib_table ):
 
     def cueBall(self, table, xvel, yvel):
 
+        ball = None
+
         #goes through table to find the ball
         for obj in table:
 
@@ -736,6 +738,19 @@ class Game():
 
             # segment returns None when no balls are rolling
             if nextTable is None:
+                # save the final stopped table state
+                tableID = db.writeTable(table)
+
+                if tableID is not None:
+                    tableIDList.append(tableID)
+
+                    self.cur.execute(
+                        """INSERT INTO TableShot (TABLEID, SHOTID)
+                        VALUES (?, ?)""",
+                        (tableID + 1, shotID)
+                    )
+                    self.conn.commit()
+
                 break
 
             # get time after segment
