@@ -53,6 +53,109 @@ BALL_COLOURS = [
     "SANDYBROWN",       # no LIGHTBROWN 
     ]
 
+# create pool ball SVG with number + solid/stripe appearance
+def ballSVG(number, x, y):
+
+    # cue ball
+    if number == 0:
+        return """
+        <circle cx="%f" cy="%f" r="%f"
+                fill="white"
+                stroke="black"
+                stroke-width="3"
+                id="ball0"/>
+        """ % (x, y, BALL_RADIUS)
+
+
+    # solids 1-7 and 8 ball
+    if number <= 8:
+
+        colour = BALL_COLOURS[number]
+
+        return """
+        <circle cx="%f" cy="%f" r="%f"
+                fill="%s"
+                stroke="black"
+                stroke-width="1"
+                id="ball%d"/>
+
+        <circle cx="%f" cy="%f" r="11"
+                fill="white"/>
+
+        <text x="%f" y="%f"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">%d</text>
+        """ % (
+            x, y, BALL_RADIUS,
+            colour,
+            number,
+            x, y,
+            x, y,
+            number
+        )
+
+    # stripes 9-15
+    # use same colour as corresponding solid:
+    # 9 -> 1, 10 -> 2, etc.
+    colour = BALL_COLOURS[number - 8]
+
+    clipID = "ballClip%d" % number
+
+    return """
+    <defs>
+        <clipPath id="%s">
+            <circle cx="%f" cy="%f" r="%f"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="%f" cy="%f" r="%f"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball%d"/>
+
+    <!-- coloured stripe -->
+    <rect x="%f"
+          y="%f"
+          width="%f"
+          height="28"
+          fill="%s"
+          clip-path="url(#%s)"/>
+
+    <!-- white number circle -->
+    <circle cx="%f" cy="%f" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="%f" y="%f"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">%d</text>
+    """ % (
+        clipID,
+        x, y, BALL_RADIUS,
+
+        x, y, BALL_RADIUS,
+        number,
+
+        x - BALL_RADIUS,
+        y - 14,
+        BALL_DIAMETER,
+        colour,
+        clipID,
+
+        x, y,
+
+        x, y,
+        number
+    )
+
 ################################################################################
 class Coordinate( phylib.phylib_coord ):
     """
@@ -94,12 +197,17 @@ class StillBall( phylib.phylib_object ):
                 BALL_RADIUS
             )
 
-        return """ <circle cx="%d" cy="%d" r="%d" fill="%s" id="ball%d"/>\n""" % (
+        # return """ <circle cx="%d" cy="%d" r="%d" fill="%s" id="ball%d"/>\n""" % (
+        #     self.obj.still_ball.pos.x,
+        #     self.obj.still_ball.pos.y,
+        #     BALL_RADIUS,
+        #     BALL_COLOURS[number],
+        #     number
+        # )
+        return ballSVG(
+            self.obj.still_ball.number,
             self.obj.still_ball.pos.x,
-            self.obj.still_ball.pos.y,
-            BALL_RADIUS,
-            BALL_COLOURS[number],
-            number
+            self.obj.still_ball.pos.y
         )
 
 ################################################################################
@@ -128,8 +236,11 @@ class RollingBall( phylib.phylib_object ):
     def svg(self):
         
         #add values for the string
-        return """ <circle cx="%d" cy="%d" r="%d" fill="%s" id="ball%d"/>\n""" % (self.obj.rolling_ball.pos.x, self.obj.rolling_ball.pos.y,BALL_RADIUS,BALL_COLOURS[self.obj.rolling_ball.number], self.obj.rolling_ball.number)
-
+        return ballSVG(
+            self.obj.rolling_ball.number,
+            self.obj.rolling_ball.pos.x,
+            self.obj.rolling_ball.pos.y
+        )
 ################################################################################
 class Hole( phylib.phylib_object ):
     """
@@ -676,7 +787,7 @@ class Game():
     def getGame(self,gameID):
         
        #retreive the values of gameName, player1Name, and player2Name from the Game and Player tables
-       #Player 1 shall be the player with the lower PLAYERID
+       #player 1 shall be the player with the lower PLAYERID
         self.cur.execute("""SELECT GAMENAME
                             FROM Game
                             WHERE GAMEID == '{}'""".format(gameID+1))
@@ -756,7 +867,6 @@ class Game():
             # get time after segment
             afterTime = nextTable.time
 
-            # YOUR ORIGINAL CALCULATION - unchanged
             lengthSec = math.floor(
                 (afterTime - beforeTime) / FRAME_INTERVAL
             )
@@ -768,8 +878,6 @@ class Game():
 
                 # generate the table at this point in the segment
                 newTable = table.roll(timeFrame)
-
-                # YOUR ORIGINAL TIME CALCULATION - unchanged
                 newTable.time = beforeTime + timeFrame
 
                 # save table

@@ -1,5 +1,4 @@
 <html>
-
 <head>
   <title> Shoot! </title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -15,6 +14,8 @@
       <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
       <svg width="700" height="1375" viewBox="-25 -25 1400 2750" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        <!-- BTable and Holes -->
         <rect width="1350" height="2700" x="0" y="0" fill="#C0D0C0" />
         <rect width="1400" height="25" x="-25" y="-25" fill="darkgreen" />
         <rect width="1400" height="25" x="-25" y="2700" fill="darkgreen" />
@@ -26,6 +27,8 @@
         <circle cx="1350" cy="0" r="114" fill="black" />
         <circle cx="1350" cy="1350" r="114" fill="black" />
         <circle cx="1350" cy="2700" r="114" fill="black" />
+
+        <!-- ORIGINAL BALLS
         <circle cx="675" cy="2025" r="28" fill="WHITE" id="ball0" />
         <circle cx="675" cy="675" r="28" fill="YELLOW" id="ball1" />
         <circle cx="740" cy="625" r="28" fill="BLUE" id="ball2" />
@@ -42,6 +45,103 @@
         <circle cx="675" cy="475" r="28" fill="LIGHTSALMON" id="ball13" />
         <circle cx="550" cy="475" r="28" fill="LIGHTGREEN" id="ball14" />
         <circle cx="425" cy="475" r="28" fill="SANDYBROWN" id="ball15" />
+        -->
+
+        <!-- Clip paths for striped balls -->
+        <defs>
+          <clipPath id="clip9"><circle cx="550" cy="475" r="28" /></clipPath>
+          <clipPath id="clip10"><circle cx="740" cy="625" r="28" /></clipPath>
+          <clipPath id="clip11"><circle cx="610" cy="525" r="28" /></clipPath>
+          <clipPath id="clip12"><circle cx="550" cy="575" r="28" /></clipPath>
+          <clipPath id="clip13"><circle cx="860" cy="525" r="28" /></clipPath>
+          <clipPath id="clip14"><circle cx="800" cy="475" r="28" /></clipPath>
+          <clipPath id="clip15"><circle cx="425" cy="475" r="28" /></clipPath>
+        </defs>
+
+        <!-- Cue ball -->
+        <circle cx="675" cy="2025" r="28" fill="WHITE" stroke="black" stroke-width="3" id="ball0" />
+
+        <!-- Ball 1 -->
+        <circle cx="675" cy="675" r="28" fill="YELLOW" stroke="black" id="ball1" />
+        <circle cx="675" cy="675" r="11" fill="WHITE" />
+        <text x="675" y="675" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">1</text>
+
+        <!-- Ball 10 -->
+        <circle cx="740" cy="625" r="28" fill="WHITE" stroke="black" id="ball10" />
+        <rect x="712" y="611" width="56" height="28" fill="BLUE" clip-path="url(#clip10)" />
+        <circle cx="740" cy="625" r="11" fill="WHITE" />
+        <text x="740" y="625" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold">10</text>
+
+        <!-- Ball 3 -->
+        <circle cx="610" cy="625" r="28" fill="RED" stroke="black" id="ball3" />
+        <circle cx="610" cy="625" r="11" fill="WHITE" />
+        <text x="610" y="625" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">3</text>
+
+        <!-- Ball 4 -->
+        <circle cx="800" cy="575" r="28" fill="PURPLE" stroke="black" id="ball4" />
+        <circle cx="800" cy="575" r="11" fill="WHITE" />
+        <text x="800" y="575" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">4</text>
+
+        <!-- Ball 8 -->
+        <circle cx="675" cy="575" r="28" fill="BLACK" stroke="black" id="ball8" />
+        <circle cx="675" cy="575" r="11" fill="WHITE" />
+        <text x="675" y="575" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">8</text>
+
+        <!-- Ball 12 -->
+        <circle cx="550" cy="575" r="28" fill="WHITE" stroke="black" id="ball12" />
+        <rect x="522" y="561" width="56" height="28" fill="PURPLE" clip-path="url(#clip12)" />
+        <circle cx="550" cy="575" r="11" fill="WHITE" />
+        <text x="550" y="575" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold">12</text>
+
+        <!-- Ball 13 -->
+        <circle cx="860" cy="525" r="28" fill="WHITE" stroke="black" id="ball13" />
+        <rect x="832" y="511" width="56" height="28" fill="ORANGE" clip-path="url(#clip13)" />
+        <circle cx="860" cy="525" r="11" fill="WHITE" />
+        <text x="860" y="525" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold">13</text>
+
+        <!-- Ball 6 -->
+        <circle cx="740" cy="525" r="28" fill="GREEN" stroke="black" id="ball6" />
+        <circle cx="740" cy="525" r="11" fill="WHITE" />
+        <text x="740" y="525" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">6</text>
+
+        <!-- Ball 11 -->
+        <circle cx="610" cy="525" r="28" fill="WHITE" stroke="black" id="ball11" />
+        <rect x="582" y="511" width="56" height="28" fill="RED" clip-path="url(#clip11)" />
+        <circle cx="610" cy="525" r="11" fill="WHITE" />
+        <text x="610" y="525" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold">11</text>
+
+        <!-- Ball 2 -->
+        <circle cx="480" cy="525" r="28" fill="BLUE" stroke="black" id="ball2" />
+        <circle cx="480" cy="525" r="11" fill="WHITE" />
+        <text x="480" y="525" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">2</text>
+
+        <!-- Ball 7 -->
+        <circle cx="920" cy="475" r="28" fill="BROWN" stroke="black" id="ball7" />
+        <circle cx="920" cy="475" r="11" fill="WHITE" />
+        <text x="920" y="475" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">7</text>
+
+        <!-- Ball 14 -->
+        <circle cx="800" cy="475" r="28" fill="WHITE" stroke="black" id="ball14" />
+        <rect x="772" y="461" width="56" height="28" fill="GREEN" clip-path="url(#clip14)" />
+        <circle cx="800" cy="475" r="11" fill="WHITE" />
+        <text x="800" y="475" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold">14</text>
+
+        <!-- Ball 5 -->
+        <circle cx="675" cy="475" r="28" fill="ORANGE" stroke="black" id="ball5" />
+        <circle cx="675" cy="475" r="11" fill="WHITE" />
+        <text x="675" y="475" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="bold">5</text>
+
+        <!-- Ball 9 -->
+        <circle cx="550" cy="475" r="28" fill="WHITE" stroke="black" id="ball9" />
+        <rect x="522" y="461" width="56" height="28" fill="YELLOW" clip-path="url(#clip9)" />
+        <circle cx="550" cy="475" r="11" fill="WHITE" />
+        <text x="550" y="475" text-anchor="middle" dominant-baseline="middle" font-size="14" font-weight="bold">9</text>
+
+        <!-- Ball 15 -->
+        <circle cx="425" cy="475" r="28" fill="WHITE" stroke="black" id="ball15" />
+        <rect x="397" y="461" width="56" height="28" fill="BROWN" clip-path="url(#clip15)" />
+        <circle cx="425" cy="475" r="11" fill="WHITE" />
+        <text x="425" y="475" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold">15</text>
       </svg>
     </div>
 
@@ -66,5 +166,4 @@
     </button>
 
 </body>
-
 </html>

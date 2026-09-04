@@ -15,12 +15,92 @@
     <h1>Pool Table!</h1>
     <hr>
     <h3 id="gameNameDisplay"></h3>
-    <h3 id="player1Display"></h3>
-    <h3 id="player2Display"></h3>
+    <!-- <h3 id="player1Display"></h3>
+    <h3 id="player2Display"></h3> -->
     <br>
     <h3 id="turnDisplay"> </h3>
     <div id="ballnumInfo">
-        <!-- pics of which balls are high and low -->
+    <!-- pics of which balls are high and low -->
+
+        <!-- open-table display -->
+        <div id="openTableCard" class="open-table-card">
+            <div class="open-table-title">OPEN TABLE</div>
+            <div class="open-table-subtitle">
+                Pocket a solid or stripe to claim your group
+            </div>
+
+            <div class="group-guide">
+                <span class="solid-guide">SOLIDS</span>
+                <span>1 - 7</span>
+
+                <span class="guide-divider">VS</span>
+
+                <span class="stripe-guide">STRIPES</span>
+                <span>9 - 15</span>
+            </div>
+        </div>
+
+        <!-- player scoreboard -->
+        <div id="playerScoreBoard" class="player-scoreboard">
+
+            <!-- Player 1 -->
+            <div id="player1ScoreCard" class="player-score-card">
+
+                <div class="player-score-header">
+                    <span id="scorePlayer1Name" class="score-player-name"></span>
+                    <span id="scorePlayer1Group" class="group-badge"></span>
+                </div>
+
+                <div class="remaining-title">
+                    Balls Remaining
+                </div>
+
+                <div class="remaining-balls">
+                    <span id="player1ScoreBall0" class="score-ball"></span>
+                    <span id="player1ScoreBall1" class="score-ball"></span>
+                    <span id="player1ScoreBall2" class="score-ball"></span>
+                    <span id="player1ScoreBall3" class="score-ball"></span>
+                    <span id="player1ScoreBall4" class="score-ball"></span>
+                    <span id="player1ScoreBall5" class="score-ball"></span>
+                    <span id="player1ScoreBall6" class="score-ball"></span>
+                </div>
+
+                <div id="player1Cleared" class="cleared-message">
+                    ALL CLEARED - SHOOT THE 8 BALL
+                </div>
+            </div>
+
+            <div class="versus">
+                VS
+            </div>
+
+            <!-- Player 2 -->
+            <div id="player2ScoreCard" class="player-score-card">
+
+                <div class="player-score-header">
+                    <span id="scorePlayer2Name" class="score-player-name"></span>
+                    <span id="scorePlayer2Group" class="group-badge"></span>
+                </div>
+
+                <div class="remaining-title">
+                    Balls Remaining
+                </div>
+
+                <div class="remaining-balls">
+                    <span id="player2ScoreBall0" class="score-ball"></span>
+                    <span id="player2ScoreBall1" class="score-ball"></span>
+                    <span id="player2ScoreBall2" class="score-ball"></span>
+                    <span id="player2ScoreBall3" class="score-ball"></span>
+                    <span id="player2ScoreBall4" class="score-ball"></span>
+                    <span id="player2ScoreBall5" class="score-ball"></span>
+                    <span id="player2ScoreBall6" class="score-ball"></span>
+                </div>
+
+                <div id="player2Cleared" class="cleared-message">
+                    ALL CLEARED - SHOOT THE 8 BALL
+                </div>
+            </div>
+        </div>
     </div>
     <hr><br>
     <div id="svgInfo">

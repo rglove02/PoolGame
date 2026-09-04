@@ -138,22 +138,22 @@ class MyHandler( BaseHTTPRequestHandler ):
         table += Physics.StillBall(0, Physics.Coordinate(675, 2025))  # Cue ball (not part of the rack)
         table += Physics.StillBall(1, Physics.Coordinate(675, 675))  # Top of the triangle
 
-        table += Physics.StillBall(2, Physics.Coordinate(740, 625))
+        table += Physics.StillBall(10, Physics.Coordinate(740, 625))
         table += Physics.StillBall(3, Physics.Coordinate(610, 625))
 
         table += Physics.StillBall(4, Physics.Coordinate(800, 575))
         table += Physics.StillBall(8, Physics.Coordinate(675, 575)) # 8 ball in the center
-        table += Physics.StillBall(5, Physics.Coordinate(550, 575))
+        table += Physics.StillBall(12, Physics.Coordinate(550, 575))
         
-        table += Physics.StillBall(6, Physics.Coordinate(860, 525))
-        table += Physics.StillBall(7, Physics.Coordinate(740, 525))  
-        table += Physics.StillBall(9, Physics.Coordinate(610, 525))
-        table += Physics.StillBall(10, Physics.Coordinate(480, 525))
+        table += Physics.StillBall(13, Physics.Coordinate(860, 525))
+        table += Physics.StillBall(6, Physics.Coordinate(740, 525))  
+        table += Physics.StillBall(11, Physics.Coordinate(610, 525))
+        table += Physics.StillBall(2, Physics.Coordinate(480, 525))
 
-        table += Physics.StillBall(11, Physics.Coordinate(920, 475))
-        table += Physics.StillBall(12, Physics.Coordinate(800, 475))
-        table += Physics.StillBall(13, Physics.Coordinate(675, 475))  
-        table += Physics.StillBall(14, Physics.Coordinate(550, 475))
+        table += Physics.StillBall(7, Physics.Coordinate(920, 475))
+        table += Physics.StillBall(14, Physics.Coordinate(800, 475))
+        table += Physics.StillBall(5, Physics.Coordinate(675, 475))  
+        table += Physics.StillBall(9, Physics.Coordinate(550, 475))
         table += Physics.StillBall(15, Physics.Coordinate(425, 475))
 
         #add blls to table

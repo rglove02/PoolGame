@@ -15,19 +15,363 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
  <circle cx="1350" cy="1350" r="114" fill="black" />
  <circle cx="1350" cy="2700" r="114" fill="black" />
  <circle cx="675" cy="2025" r="28" fill="WHITE" stroke="black" stroke-width="5" id="ball0"/>
- <circle cx="675" cy="675" r="28" fill="YELLOW" id="ball1"/>
- <circle cx="740" cy="625" r="28" fill="BLUE" id="ball2"/>
- <circle cx="610" cy="625" r="28" fill="RED" id="ball3"/>
- <circle cx="800" cy="575" r="28" fill="PURPLE" id="ball4"/>
- <circle cx="675" cy="575" r="28" fill="BLACK" id="ball8"/>
- <circle cx="550" cy="575" r="28" fill="ORANGE" id="ball5"/>
- <circle cx="860" cy="525" r="28" fill="GREEN" id="ball6"/>
- <circle cx="740" cy="525" r="28" fill="BROWN" id="ball7"/>
- <circle cx="610" cy="525" r="28" fill="LIGHTYELLOW" id="ball9"/>
- <circle cx="480" cy="525" r="28" fill="LIGHTBLUE" id="ball10"/>
- <circle cx="920" cy="475" r="28" fill="PINK" id="ball11"/>
- <circle cx="800" cy="475" r="28" fill="MEDIUMPURPLE" id="ball12"/>
- <circle cx="675" cy="475" r="28" fill="LIGHTSALMON" id="ball13"/>
- <circle cx="550" cy="475" r="28" fill="LIGHTGREEN" id="ball14"/>
- <circle cx="425" cy="475" r="28" fill="SANDYBROWN" id="ball15"/>
-</svg>
+
+        <circle cx="675.000000" cy="675.000000" r="28.500000"
+                fill="YELLOW"
+                stroke="black"
+                stroke-width="1"
+                id="ball1"/>
+
+        <circle cx="675.000000" cy="675.000000" r="11"
+                fill="white"/>
+
+        <text x="675.000000" y="675.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">1</text>
+        
+    <defs>
+        <clipPath id="ballClip10">
+            <circle cx="740.000000" cy="625.000000" r="28.500000"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="740.000000" cy="625.000000" r="28.500000"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball10"/>
+
+    <!-- coloured stripe -->
+    <rect x="711.500000"
+          y="611.000000"
+          width="57.000000"
+          height="28"
+          fill="BLUE"
+          clip-path="url(#ballClip10)"/>
+
+    <!-- white number circle -->
+    <circle cx="740.000000" cy="625.000000" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="740.000000" y="625.000000"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">10</text>
+    
+        <circle cx="610.000000" cy="625.000000" r="28.500000"
+                fill="RED"
+                stroke="black"
+                stroke-width="1"
+                id="ball3"/>
+
+        <circle cx="610.000000" cy="625.000000" r="11"
+                fill="white"/>
+
+        <text x="610.000000" y="625.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">3</text>
+        
+        <circle cx="800.000000" cy="575.000000" r="28.500000"
+                fill="PURPLE"
+                stroke="black"
+                stroke-width="1"
+                id="ball4"/>
+
+        <circle cx="800.000000" cy="575.000000" r="11"
+                fill="white"/>
+
+        <text x="800.000000" y="575.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">4</text>
+        
+        <circle cx="675.000000" cy="575.000000" r="28.500000"
+                fill="BLACK"
+                stroke="black"
+                stroke-width="1"
+                id="ball8"/>
+
+        <circle cx="675.000000" cy="575.000000" r="11"
+                fill="white"/>
+
+        <text x="675.000000" y="575.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">8</text>
+        
+    <defs>
+        <clipPath id="ballClip12">
+            <circle cx="550.000000" cy="575.000000" r="28.500000"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="550.000000" cy="575.000000" r="28.500000"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball12"/>
+
+    <!-- coloured stripe -->
+    <rect x="521.500000"
+          y="561.000000"
+          width="57.000000"
+          height="28"
+          fill="PURPLE"
+          clip-path="url(#ballClip12)"/>
+
+    <!-- white number circle -->
+    <circle cx="550.000000" cy="575.000000" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="550.000000" y="575.000000"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">12</text>
+    
+    <defs>
+        <clipPath id="ballClip13">
+            <circle cx="860.000000" cy="525.000000" r="28.500000"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="860.000000" cy="525.000000" r="28.500000"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball13"/>
+
+    <!-- coloured stripe -->
+    <rect x="831.500000"
+          y="511.000000"
+          width="57.000000"
+          height="28"
+          fill="ORANGE"
+          clip-path="url(#ballClip13)"/>
+
+    <!-- white number circle -->
+    <circle cx="860.000000" cy="525.000000" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="860.000000" y="525.000000"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">13</text>
+    
+        <circle cx="740.000000" cy="525.000000" r="28.500000"
+                fill="GREEN"
+                stroke="black"
+                stroke-width="1"
+                id="ball6"/>
+
+        <circle cx="740.000000" cy="525.000000" r="11"
+                fill="white"/>
+
+        <text x="740.000000" y="525.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">6</text>
+        
+    <defs>
+        <clipPath id="ballClip11">
+            <circle cx="610.000000" cy="525.000000" r="28.500000"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="610.000000" cy="525.000000" r="28.500000"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball11"/>
+
+    <!-- coloured stripe -->
+    <rect x="581.500000"
+          y="511.000000"
+          width="57.000000"
+          height="28"
+          fill="RED"
+          clip-path="url(#ballClip11)"/>
+
+    <!-- white number circle -->
+    <circle cx="610.000000" cy="525.000000" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="610.000000" y="525.000000"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">11</text>
+    
+        <circle cx="480.000000" cy="525.000000" r="28.500000"
+                fill="BLUE"
+                stroke="black"
+                stroke-width="1"
+                id="ball2"/>
+
+        <circle cx="480.000000" cy="525.000000" r="11"
+                fill="white"/>
+
+        <text x="480.000000" y="525.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">2</text>
+        
+        <circle cx="920.000000" cy="475.000000" r="28.500000"
+                fill="BROWN"
+                stroke="black"
+                stroke-width="1"
+                id="ball7"/>
+
+        <circle cx="920.000000" cy="475.000000" r="11"
+                fill="white"/>
+
+        <text x="920.000000" y="475.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">7</text>
+        
+    <defs>
+        <clipPath id="ballClip14">
+            <circle cx="800.000000" cy="475.000000" r="28.500000"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="800.000000" cy="475.000000" r="28.500000"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball14"/>
+
+    <!-- coloured stripe -->
+    <rect x="771.500000"
+          y="461.000000"
+          width="57.000000"
+          height="28"
+          fill="GREEN"
+          clip-path="url(#ballClip14)"/>
+
+    <!-- white number circle -->
+    <circle cx="800.000000" cy="475.000000" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="800.000000" y="475.000000"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">14</text>
+    
+        <circle cx="675.000000" cy="475.000000" r="28.500000"
+                fill="ORANGE"
+                stroke="black"
+                stroke-width="1"
+                id="ball5"/>
+
+        <circle cx="675.000000" cy="475.000000" r="11"
+                fill="white"/>
+
+        <text x="675.000000" y="475.000000"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-size="15"
+              font-weight="bold"
+              fill="black">5</text>
+        
+    <defs>
+        <clipPath id="ballClip9">
+            <circle cx="550.000000" cy="475.000000" r="28.500000"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="550.000000" cy="475.000000" r="28.500000"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball9"/>
+
+    <!-- coloured stripe -->
+    <rect x="521.500000"
+          y="461.000000"
+          width="57.000000"
+          height="28"
+          fill="YELLOW"
+          clip-path="url(#ballClip9)"/>
+
+    <!-- white number circle -->
+    <circle cx="550.000000" cy="475.000000" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="550.000000" y="475.000000"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">9</text>
+    
+    <defs>
+        <clipPath id="ballClip15">
+            <circle cx="425.000000" cy="475.000000" r="28.500000"/>
+        </clipPath>
+    </defs>
+
+    <!-- white base -->
+    <circle cx="425.000000" cy="475.000000" r="28.500000"
+            fill="white"
+            stroke="black"
+            stroke-width="1"
+            id="ball15"/>
+
+    <!-- coloured stripe -->
+    <rect x="396.500000"
+          y="461.000000"
+          width="57.000000"
+          height="28"
+          fill="BROWN"
+          clip-path="url(#ballClip15)"/>
+
+    <!-- white number circle -->
+    <circle cx="425.000000" cy="475.000000" r="11"
+            fill="white"/>
+
+    <!-- number -->
+    <text x="425.000000" y="475.000000"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="15"
+          font-weight="bold"
+          fill="black">15</text>
+    </svg>

@@ -9,9 +9,8 @@ body {
 }
 
 h1 {
-    text-align: center;
-    font-size: 60px;
-    margin: 0.5em 0;
+    font-size: 48px;
+    margin: 20px 0 10px 0;
 }
 
 h3,
@@ -49,4 +48,349 @@ svg {
     max-width: 100%;
     height: 1670;
     width: auto;
+}
+
+/* GAME INFORMATION / SCOREBOARD */
+#gameNameDisplay {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+#player1Display,
+#player2Display {
+    font-size: 24px;
+    margin: 4px 0;
+}
+
+#turnDisplay {
+    display: inline-block;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    margin: 15px 0;
+
+    padding: 10px 24px;
+
+    background: white;
+
+    border: 3px solid #267a37;
+    border-radius: 25px;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+#ballnumInfo {
+    width: 90%;
+    max-width: 850px;
+
+    margin: 12px auto 25px auto;
+}
+
+/* OPEN TABLE */
+.open-table-card {
+    background: rgba(255, 255, 255, 0.85);
+
+    padding: 16px 25px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.open-table-title {
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #267a37;
+}
+
+.open-table-subtitle {
+    font-size: 16px;
+
+    margin-top: 4px;
+
+    color: #555;
+}
+
+.group-guide {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 14px;
+
+    font-size: 16px;
+}
+
+.solid-guide {
+    font-weight: bold;
+
+    background: #267a37;
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+}
+
+.stripe-guide {
+    font-weight: bold;
+
+    background: #4057a8;
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+}
+
+.guide-divider {
+    margin: 0 12px;
+
+    font-weight: bold;
+
+    color: #777;
+}
+
+/* PLAYER SCOREBOARD */
+.player-scoreboard {
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+}
+
+.player-score-card {
+    width: 310px;
+    min-height: 125px;
+
+    padding: 15px 18px;
+
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.82);
+
+    border: 3px solid transparent;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+    transition: 0.2s;
+}
+
+/* Highlights whose turn it currently is */
+.player-score-card.active-player {
+    border-color: #267a37;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 0 3px rgba(38, 122, 55, 0.15),
+        0 5px 14px rgba(0, 0, 0, 0.20);
+}
+
+.player-score-card.active-player::before {
+    content: "CURRENT TURN";
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: #267a37;
+}
+
+.player-score-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.score-player-name {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.group-badge {
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: white;
+}
+
+.group-badge.low {
+    background: #267a37;
+}
+
+.group-badge.high {
+    background: #4057a8;
+}
+
+.remaining-title {
+    margin-top: 12px;
+    margin-bottom: 7px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    color: #666;
+}
+
+.remaining-balls {
+    display: flex;
+
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    min-height: 32px;
+}
+
+.versus {
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #555;
+}
+
+/* MINI POOL BALLS */
+.score-ball {
+    display: none;
+
+    width: 31px;
+    height: 31px;
+
+    box-sizing: border-box;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    border: 1px solid #222;
+
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* solid balls */
+.score-ball.score-solid {
+    display: inline-flex;
+
+    background: var(--ball-colour);
+}
+
+/* striped balls */
+.score-ball.score-striped {
+    display: inline-flex;
+
+    background:
+        linear-gradient(
+            to bottom,
+
+            white 0%,
+            white 27%,
+
+            var(--ball-colour) 27%,
+            var(--ball-colour) 73%,
+
+            white 73%,
+            white 100%
+        );
+}
+
+/* white number circle in middle */
+.score-ball.score-solid::after,
+.score-ball.score-striped::after {
+    content: attr(data-ball-number);
+
+    width: 16px;
+    height: 16px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: black;
+
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.cleared-message {
+    display: none;
+
+    margin-top: 8px;
+
+    color: #267a37;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* game header */
+#gameHeader {
+    width: 90%;
+    max-width: 850px;
+
+    margin: 15px auto 20px auto;
+    padding: 15px 20px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    border-radius: 15px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+#gameNameDisplay {
+    font-size: 28px;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+#gameNameDisplay::before {
+    content: "GAME: ";
+
+    font-size: 14px;
+    font-weight: bold;
+
+    color: #666;
+}
+
+#turnDisplay {
+    display: inline-block;
+
+    margin: 0;
+
+    padding: 8px 22px;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    color: white;
+    background: #267a37;
+
+    border-radius: 20px;
 }
