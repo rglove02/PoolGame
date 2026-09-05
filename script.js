@@ -100,10 +100,25 @@ $(document).ready(function () {
         });
     })
 
-    // //start a new game button
+    //start a new game button
     // document.getElementById('startNewGame').addEventListener('click', function () {
     //     window.location.href = 'shoot.html';
     // });
+
+    $('#startNewGame').on('click', function () {
+
+        // clear information from the previous game
+        localStorage.removeItem('player1Name');
+        localStorage.removeItem('player2Name');
+        localStorage.removeItem('gameName');
+        localStorage.removeItem('currentPlayer');
+        localStorage.removeItem('player1Balls');
+        localStorage.removeItem('player2Balls');
+        localStorage.removeItem('allBalls');
+
+        // return to setup page
+        window.location.href = 'shoot.html';
+    });
 });
 
 function showLine(event) {

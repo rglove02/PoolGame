@@ -371,8 +371,6 @@ svg {
 }
 
 #gameNameDisplay::before {
-    content: "GAME: ";
-
     font-size: 14px;
     font-weight: bold;
 

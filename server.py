@@ -257,6 +257,34 @@ class MyHandler( BaseHTTPRequestHandler ):
       if len(tableIDList) > 0:
         MyHandler.table = MyHandler.db.readTable(tableIDList[-1])
 
+      # check if cue ball was pocketed
+      cueBallExists = False
+
+      for obj in MyHandler.table:
+          if obj is not None:
+              if isinstance(obj, Physics.StillBall):
+                  if obj.obj.still_ball.number == 0:
+                      cueBallExists = True
+
+              elif isinstance(obj, Physics.RollingBall):
+                  if obj.obj.rolling_ball.number == 0:
+                      cueBallExists = True
+
+      # put cue ball back on table after a scratch
+      if not cueBallExists:
+          cueBall = Physics.StillBall(0, Physics.Coordinate(675, 2025))
+
+    MyHandler.table += cueBall
+
+    # Add reset state to animation so it appears again in browser
+    tableSVG.append(MyHandler.table.svg())
+
+    # Save reset table state in database
+    resetTableID = MyHandler.db.writeTable(MyHandler.table)
+
+    if resetTableID is not None:
+        tableIDList.append(resetTableID)
+
       self.send_response(200)
       self.send_header('Content-Type', 'application/json')
       self.end_headers()
